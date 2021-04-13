@@ -1,0 +1,125 @@
+---
+
+# Number of seconds to sleep before starting any servers. Useful in
+# testing how orchestrators deal with longer app
+# initiation. $ABLE_STARTUP_LAG
+startup_lag: 0
+
+# Number of seconds to sleep before starting any servers. Useful in
+# testing how orchestrators deal with longer app
+# teardown. $ABLE_SHUTDOWN_LAG
+shutdown_lag: 0
+
+# The port the admin https server listens on. The admin server is used
+# for dynamic configuration. $ABLE_ADMIN_PORT
+admin_port: 0
+
+# The TLS certificate file used for all encrypted communications for all
+# servers. $ABLE_TLS_CERT_FILE
+tls_cert_file: ""
+
+# The TLS key file used for all encrypted communications for all
+# servers. $ABLE_TLS_KEY_FILE
+tls_key_file: ""
+
+# A file that if exists will tell able to die when it tries to
+# start. Useful in testing how orchestrators and monitoring act when
+# when your application fails to start. $ABLE_DEAD_FILE
+dead_file: ""
+
+# A file that if exists will instruct the /health endpoint to return
+# unhealthy. Useful in testing how orchestrators and monitoring act
+# when application starts but fails to enter a healthy
+# state. $ABLE_SICK_FILE
+sick_file: ~
+
+log:
+  # Use structured or unstructured log format. Set to either json or
+  # line. $ABLE_LOG_TYPE
+  type: json|line
+  # The directory to store logs. $ABLE_LOG_DIR
+  dir : /var/log/able
+  # Send all logging to STDOUT. Set to either true or false. If set to
+  # true then log dir is ignored. $ABLE_LOG_OUT
+  out : true|false
+
+# For the different receiver transports the configuration options are:
+#
+# port = The port that this server should listen on. Set to 0 to disable
+# this transport.
+#
+# latency = The number of milliseconds to wait before responding to a
+# request
+#
+# error_rate = The number of requests out of 100 that should return an
+# error.
+
+receiver:
+  http:
+    port      : 0    # $ABLE_RECEIVER_HTTP_PORT
+    latency   : 0    # $ABLE_RECEIVER_HTTP_LATENCY
+    error_rate: 0    # $ABLE_RECEIVER_HTTP_ERROR_RATE
+  https:
+    port      : 0    # $ABLE_RECEIVER_HTTPS_PORT
+    latency   : 0    # $ABLE_RECEIVER_HTTPS_LATENCY
+    error_rate: 0    # $ABLE_RECEIVER_HTTPS_ERROR_RATE
+  tcp:
+    port      : 0    # $ABLE_RECEIVER_TCP_PORT
+    latency   : 0    # $ABLE_RECEIVER_TCP_LATENCY
+    error_rate: 0    # $ABLE_RECEIVER_TCP_ERROR_RATE
+  tcps:
+    port      : 0    # $ABLE_RECEIVER_TCPS_PORT
+    latency   : 0    # $ABLE_RECEIVER_TCPS_LATENCY
+    error_rate: 0    # $ABLE_RECEIVER_TCPS_ERROR_RATE
+  grpc:
+    port      : 0    # $ABLE_RECEIVER_GRPC_PORT
+    latency   : 0    # $ABLE_RECEIVER_GRPC_LATENCY
+    error_rate: 0    # $ABLE_RECEIVER_GRPC_ERROR_RATE
+
+# For the different sender transports the configuration options are:
+#
+# port = The port on the receiver host to connect to. Set to 0 to
+# disable this transport.
+#
+# latency = The number of milliseconds to wait before sending the next
+# request
+#
+# send_rate = The number of requests to send out simultaneously for each
+# iteration
+
+sender:
+  # The hostname or ip addr of the receiver host. $ABLE_SENDER_HOST
+  host: ""
+  http:
+    port     : 0    # $ABLE_SENDER_HTTP_PORT
+    latency  : 250  # $ABLE_SENDER_HTTP_LATENCY
+    send_rate: 1    # $ABLE_SENDER_HTTP_SEND_RATE
+  https:
+    port     : 0    # $ABLE_SENDER_HTTPS_PORT
+    latency  : 250  # $ABLE_SENDER_HTTPS_LATENCY
+    send_rate: 1    # $ABLE_SENDER_HTTPS_SEND_RATE
+  tcp:
+    port     : 0    # $ABLE_SENDER_TCP_PORT
+    latency  : 250  # $ABLE_SENDER_TCP_LATENCY
+    send_rate: 1    # $ABLE_SENDER_TCP_SEND_RATE
+  tcps:
+    port     : 0    # $ABLE_SENDER_TCPS_PORT
+    latency  : 250  # $ABLE_SENDER_TCPS_LATENCY
+    send_rate: 1    # $ABLE_SENDER_TCPS_SEND_RATE
+  grpc:
+    port     : 0    # $ABLE_SENDER_GRPC_PORT
+    latency  : 250  # $ABLE_SENDER_GRPC_LATENCY
+    send_rate: 1    # $ABLE_SENDER_GRPC_SEND_RATE
+
+timeout:
+  http:
+    # The Golang http server server timeout. $ABLE_TIME_HTTP_SERVER
+    server: 30
+    # The Golang http server write timeout. $ABLE_TIME_HTTP_WRITE
+    write : 10
+    # The Golang http server read timeout. $ABLE_TIME_HTTP_READ
+    read  : 10
+    # The Golang http server idle timeout. $ABLE_TIME_HTTP_IDLE
+    idle  : 10
+    # The Golang http client timeout. $ABLE_TIME_HTTP_CLIENT
+    client: 30
